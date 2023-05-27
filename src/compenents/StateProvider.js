@@ -1,42 +1,52 @@
 import { createContext, useState } from "react";
-
+import { FaChessPawn } from "react-icons/fa";
+import { TbChessRookFilled } from "react-icons/tb";
+import { FaChessKnight } from "react-icons/fa";
+import { FaChessBishop } from "react-icons/fa";
+import { GiChessQueen } from "react-icons/gi";
+import { GiChessKing } from "react-icons/gi";
 export const StateContext = createContext();
 
 const StateProvider = ({ children }) => {
   const occupiedSquare = [
-    { a1: ["rook", "white"] },
-    { b1: ["knight", "white"] },
-    { c1: ["bishop", "white"] },
-    { d1: ["queen", "white"] },
-    { e1: ["king", "white"] },
-    { f1: ["bishop", "white"] },
-    { g1: ["knight", "white"] },
-    { h1: ["rook", "white"] },
-    { a2: ["pawn", "white"] },
-    { b2: ["pawn", "white"] },
-    { c2: ["pawn", "white"] },
-    { d2: ["pawn", "white"] },
-    { e2: ["pawn", "white"] },
-    { f2: ["pawn", "white"] },
-    { g2: ["pawn", "white"] },
-    { h2: ["pawn", "white"] },
-    { a8: ["rook", "black"] },
-    { b8: ["knight", "black"] },
-    { c8: ["bishop", "black"] },
-    { d8: ["queen", "black"] },
-    { e8: ["king", "black"] },
-    { f8: ["bishop", "black"] },
-    { g8: ["knight", "black"] },
-    { h8: ["rook", "black"] },
-    { a7: ["pawn", "black"] },
-    { b7: ["pawn", "black"] },
-    { c7: ["pawn", "black"] },
-    { d7: ["pawn", "black"] },
-    { e7: ["pawn", "black"] },
-    { f7: ["pawn", "black"] },
-    { g7: ["pawn", "black"] },
-    { h7: ["pawn", "black"] },
+    { a1: ["rook", "white", <TbChessRookFilled />] },
+    { b1: ["knight", "white", <FaChessKnight />] },
+    { c1: ["bishop", "white", <FaChessBishop />] },
+    { d1: ["queen", "white", <GiChessQueen />] },
+    { e1: ["king", "white", <GiChessKing />] },
+    { f1: ["bishop", "white", <FaChessBishop />] },
+    { g1: ["knight", "white", <FaChessKnight />] },
+    { h1: ["rook", "white", <TbChessRookFilled />] },
+    { a2: ["pawn", "white", <FaChessPawn />] },
+    { b2: ["pawn", "white", <FaChessPawn />] },
+    { c2: ["pawn", "white", <FaChessPawn />] },
+    { d2: ["pawn", "white", <FaChessPawn />] },
+    { e2: ["pawn", "white", <FaChessPawn />] },
+    { f2: ["pawn", "white", <FaChessPawn />] },
+    { g2: ["pawn", "white", <FaChessPawn />] },
+    { h2: ["pawn", "white", <FaChessPawn />] },
+    { a8: ["rook", "black", <TbChessRookFilled />] },
+    { b8: ["knight", "black", <FaChessKnight />] },
+    { c8: ["bishop", "black", <FaChessBishop />] },
+    { d8: ["queen", "black", <GiChessQueen />] },
+    { e8: ["king", "black", <GiChessKing />] },
+    { f8: ["bishop", "black", <FaChessBishop />] },
+    { g8: ["knight", "black", <FaChessKnight />] },
+    { h8: ["rook", "black", <TbChessRookFilled />] },
+    { a7: ["pawn", "black", <FaChessPawn />] },
+    { b7: ["pawn", "black", <FaChessPawn />] },
+    { c7: ["pawn", "black", <FaChessPawn />] },
+    { d7: ["pawn", "black", <FaChessPawn />] },
+    { e7: ["pawn", "black", <FaChessPawn />] },
+    { f7: ["pawn", "black", <FaChessPawn />] },
+    { g7: ["pawn", "black", <FaChessPawn />] },
+    { h7: ["pawn", "black", <FaChessPawn />] },
   ];
+  const [colorTurn, setColorTurn] = useState(false);
+  const [whitePossibleMove, setWhitePossibleMove] = useState(false);
+  const [blackPossibleMove, setBlackPossibleMove] = useState([]);
+  const [whiteWinPieces, setWhiteWinPieces] = useState([]);
+  const [blackWinPieces, setBlackWinPieces] = useState([]);
 
   const createCaseName = () => {
     var arr = [];
@@ -66,7 +76,20 @@ const StateProvider = ({ children }) => {
   const [chessGame, setChessGame] = useState(createObject());
 
   return (
-    <StateContext.Provider value={{ chessGame, setChessGame }}>
+    <StateContext.Provider
+      value={{
+        chessGame,
+        setChessGame,
+        whitePossibleMove,
+        setWhitePossibleMove,
+        blackPossibleMove,
+        setBlackPossibleMove,
+        whiteWinPieces,
+        setWhiteWinPieces,
+        blackWinPieces,
+        setBlackWinPieces,
+      }}
+    >
       {children}
     </StateContext.Provider>
   );

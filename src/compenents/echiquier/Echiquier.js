@@ -25,7 +25,9 @@ const Echiquier = () => {
               {chessGame
                 .filter((ele) => ele.name == letters[i].concat(n + 1))
                 .map((ele) => (
-                  <p>{ele.name}</p>
+                  <>
+                    <p>{ele.occupied}</p>
+                  </>
                 ))}
             </Row>
           ))}

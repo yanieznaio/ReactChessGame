@@ -7,6 +7,11 @@ export const Container = styled.div`
   margin: auto;
   border: 1px solid;
   grid-template-columns: repeat(8, 1fr);
+
+  @media screen and (max-width: 800px) {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 export const Column = styled.div`
@@ -18,7 +23,7 @@ export const Column = styled.div`
 `;
 
 export const Row = styled.div`
-  height: 100%;
+  height: 100px;
   background: ${(props) => (props.white ? "black" : "white")};
   color: ${(props) => (props.white ? "white" : "black")};
 `;
