@@ -42,12 +42,8 @@ const StateProvider = ({ children }) => {
     { g7: ["pawn", "black", <FaChessPawn />] },
     { h7: ["pawn", "black", <FaChessPawn />] },
   ];
-  const [colorTurn, setColorTurn] = useState(false);
-  const [whitePossibleMove, setWhitePossibleMove] = useState(false);
-  const [blackPossibleMove, setBlackPossibleMove] = useState([]);
-  const [whiteWinPieces, setWhiteWinPieces] = useState([]);
-  const [blackWinPieces, setBlackWinPieces] = useState([]);
 
+  const [pieceChoice, setPieceChoice] = useState();
   const createCaseName = () => {
     var arr = [];
     const letters = "abcdefgh";
@@ -80,14 +76,8 @@ const StateProvider = ({ children }) => {
       value={{
         chessGame,
         setChessGame,
-        whitePossibleMove,
-        setWhitePossibleMove,
-        blackPossibleMove,
-        setBlackPossibleMove,
-        whiteWinPieces,
-        setWhiteWinPieces,
-        blackWinPieces,
-        setBlackWinPieces,
+        pieceChoice,
+        setPieceChoice,
       }}
     >
       {children}
