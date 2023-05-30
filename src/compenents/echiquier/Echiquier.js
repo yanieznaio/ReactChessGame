@@ -9,8 +9,7 @@ const Echiquier = () => {
 
   const handleClick = (pieceName) => {
     const nextpos = pieceName[0].concat(parseInt(pieceName[1]) + 1);
-    const piece = chessGame.filter((ele) => ele.name === pieceName)[0]
-      .occupied[0];
+    const piece = chessGame.filter((ele) => ele.name === pieceName)[0].occupied;
     console.log(piece);
     const newChessGame = chessGame
       .map((ele) => (ele.name === pieceName ? { ...ele, occupied: "" } : ele))

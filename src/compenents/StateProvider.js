@@ -63,7 +63,11 @@ const StateProvider = ({ children }) => {
         name: caseName[i],
         occupied: occupiedSquare
           .filter((square) => square[caseName[i]])
-          .map((square) => square[caseName[i]]),
+          .map((square) => square[caseName[i]])[0],
+        color: occupiedSquare
+          .filter((square) => square[caseName[i]])
+          .map((square) => square[caseName[i]][1])
+          .join(""),
       };
     }
     return object;
