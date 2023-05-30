@@ -8,12 +8,21 @@ const Echiquier = () => {
   const letters = "abcdefgh";
 
   const handleClick = (pieceName) => {
-    const nextpos = pieceName[0].concat(parseInt(pieceName[1]) + 1);
+    const color = chessGame.filter((ele) => ele.name === pieceName)[0].color;
     const piece = chessGame.filter((ele) => ele.name === pieceName)[0].occupied;
-    console.log(piece);
+    console.log(color);
+    const nextpos =
+      color === "white"
+        ? pieceName[0].concat(parseInt(pieceName[1]) + 1)
+        : pieceName[0].concat(parseInt(pieceName[1]) - 1);
+
     const newChessGame = chessGame
-      .map((ele) => (ele.name === pieceName ? { ...ele, occupied: "" } : ele))
-      .map((x) => (x.name === nextpos ? { ...x, occupied: piece } : x));
+      .map((ele) =>
+        ele.name === pieceName ? { ...ele, occupied: "", color: "" } : ele
+      )
+      .map((x) =>
+        x.name === nextpos ? { ...x, occupied: piece, color: color } : x
+      );
 
     console.log(newChessGame);
     setChessGame(newChessGame);
