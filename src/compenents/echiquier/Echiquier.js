@@ -7,7 +7,18 @@ const Echiquier = () => {
     useContext(StateContext);
   const letters = "abcdefgh";
 
-  console.log(chessGame);
+  const handleClick = (pieceName) => {
+    const nextpos = pieceName[0].concat(parseInt(pieceName[1]) + 1);
+    const piece = chessGame.filter((ele) => ele.name === pieceName)[0]
+      .occupied[0];
+    console.log(piece);
+    const newChessGame = chessGame
+      .map((ele) => (ele.name === pieceName ? { ...ele, occupied: "" } : ele))
+      .map((x) => (x.name === nextpos ? { ...x, occupied: piece } : x));
+
+    console.log(newChessGame);
+    setChessGame(newChessGame);
+  };
 
   return (
     <Container>
@@ -29,7 +40,7 @@ const Echiquier = () => {
                   .map((ele) => (
                     <>
                       <Piece
-                        onClick={() => setPieceChoice(ele.name)}
+                        onClick={() => handleClick(ele.name)}
                         green={pieceChoice === ele.name}
                       >
                         {ele.occupied}
