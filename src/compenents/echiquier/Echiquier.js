@@ -50,6 +50,7 @@ const Echiquier = () => {
                       <Piece
                         onClick={() => handleClick(ele.name)}
                         green={pieceChoice === ele.name}
+                        color={ele.color}
                       >
                         {ele.occupied}
                       </Piece>

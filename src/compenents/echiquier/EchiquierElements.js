@@ -29,11 +29,11 @@ export const Column = styled.div`
 export const Row = styled.div`
   width: 100%;
   height: 70px;
-  background: ${(props) => (props.white ? "black" : "white")};
-  color: ${(props) => (props.white ? "white" : "black")};
+  background: ${(props) => (props.white ? "#394867" : "#B2C8DF")};
+  color: ${(props) => props.color};
   font-size: 1.2rem;
 `;
 
 export const Piece = styled.p`
-  color: ${(props) => (props.green ? "green" : "")};
+  color: ${(props) => props.color};
 `;
