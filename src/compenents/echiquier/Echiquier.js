@@ -2,6 +2,7 @@ import { Container, ChessPlate, Column, Row, Piece } from "./EchiquierElements";
 import { FaChessPawn } from "react-icons/fa";
 import { useContext } from "react";
 import { StateContext } from "../StateProvider";
+import {rookMove} from "../games/games.js"
 const Echiquier = () => {
   const { chessGame, setChessGame, pieceChoice, setPieceChoice, possibleMove, setPossibleMove } =
     useContext(StateContext);
@@ -23,10 +24,12 @@ const Echiquier = () => {
   
   const handleClick = (pieceName) => {
     setPieceChoice(pieceName)
-    const possibleMove = checkPossibleMove(pieceName)
+    //const possibleMove = checkPossibleMove(pieceName)
     const color = chessGame.filter((ele) => ele.name === pieceName)[0].color;
     const piece = chessGame.filter((ele) => ele.name === pieceName)[0].occupied;
-    console.log(color);
+    const possibleMove = rookMove(chessGame, pieceName, color)
+    
+    
    /*  const nextpos =
       color === "white"
         ? pieceName[0].concat(parseInt(pieceName[1]) + 1)
