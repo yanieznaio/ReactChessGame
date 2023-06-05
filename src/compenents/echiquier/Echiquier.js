@@ -3,15 +3,31 @@ import { FaChessPawn } from "react-icons/fa";
 import { useContext } from "react";
 import { StateContext } from "../StateProvider";
 const Echiquier = () => {
-  const { chessGame, setChessGame, pieceChoice, setPieceChoice } =
+  const { chessGame, setChessGame, pieceChoice, setPieceChoice, possibleMove, setPossibleMove } =
     useContext(StateContext);
   const letters = "abcdefgh";
-
+  
+  
+  
+  const checkPossibleMove = (currPos) => {
+    const prevLetter = letters[letters.indexOf(currPos[0]) -1]
+    const nextLetter = letters[letters.indexOf(currPos[0]) +1]
+    const nextMove = [
+      currPos[0].concat(parseInt(currPos[1]) + 1),
+      prevLetter.concat(parseInt(currPos[1]) + 1),
+      nextLetter.concat(parseInt(currPos[1]) + 1)
+    ]
+    setPossibleMove(nextMove)
+  }
+  
+  
   const handleClick = (pieceName) => {
+    setPieceChoice(pieceName)
+    const possibleMove = checkPossibleMove(pieceName)
     const color = chessGame.filter((ele) => ele.name === pieceName)[0].color;
     const piece = chessGame.filter((ele) => ele.name === pieceName)[0].occupied;
     console.log(color);
-    const nextpos =
+   /*  const nextpos =
       color === "white"
         ? pieceName[0].concat(parseInt(pieceName[1]) + 1)
         : pieceName[0].concat(parseInt(pieceName[1]) - 1);
@@ -25,7 +41,7 @@ const Echiquier = () => {
       );
 
     console.log(newChessGame);
-    setChessGame(newChessGame);
+    setChessGame(newChessGame); */
   };
 
   return (
@@ -39,10 +55,12 @@ const Echiquier = () => {
               <Row
                 key={n}
                 name={letters[i].concat(n + 1)}
+                greenBorder = {possibleMove.includes(letters[i].concat(n+1))}
                 white={
                   (i % 2 === 0 && n % 2 === 0) || (i % 2 !== 0 && n % 2 !== 0)
                 }
               >
+         
                 {chessGame
                   .filter((ele) => ele.name == letters[i].concat(n + 1))
                   .map((ele) => (
@@ -51,6 +69,7 @@ const Echiquier = () => {
                         onClick={() => handleClick(ele.name)}
                         green={pieceChoice === ele.name}
                         color={ele.color}
+                        
                       >
                         {ele.occupied}
                       </Piece>

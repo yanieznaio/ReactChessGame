@@ -32,8 +32,14 @@ export const Row = styled.div`
   background: ${(props) => (props.white ? "#394867" : "#B2C8DF")};
   color: ${(props) => props.color};
   font-size: 1.2rem;
+  border: ${props => props.greenBorder ? '4px solid green' : ''}
+  
+  
 `;
 
 export const Piece = styled.p`
-  color: ${(props) => props.color};
+  color: ${(props) => props.green ? 'green' : props.color};
+  cursor: grab;
+  
+
 `;
