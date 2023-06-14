@@ -13,7 +13,7 @@ const rookMove = (chessGame, pieceName, color) => {
 
   //forward //backward for black
   if (
-    (color == "white" && pieceName[1] < 8) ||
+    (color === "white" && pieceName[1] < 8) ||
     (color === "black" && pieceName[1] > 1)
   ) {
     for (let i = parseInt(pieceName[1]) + 1; i <= 8; i++) {
@@ -22,8 +22,21 @@ const rookMove = (chessGame, pieceName, color) => {
 
       color === "white" ? forward.push(square) : downward.push(square);
     }
+    //backward //forward for black
+    if (
+      (color === "white" && pieceName[1] > 1) ||
+      (color === "black" && pieceName[1] < 8)
+    ) {
+      for (let i = parseInt(pieceName[1]) - 1; i > 0; i--) {
+        var square = pieceName[0].concat(i);
 
-    return forward;
+        if (!checkIfMovePossible(square, color)) break;
+
+        color === "white" ? downward.push(square) : forward.push(square);
+      }
+    }
+
+    return [...forward, ...downward];
   }
 };
 

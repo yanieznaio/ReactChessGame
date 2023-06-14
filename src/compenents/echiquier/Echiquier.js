@@ -20,8 +20,9 @@ const Echiquier = () => {
     const color = chessGame.filter((ele) => ele.name === pieceName)[0].color;
     const piece = chessGame.filter((ele) => ele.name === pieceName)[0].occupied;
     const possibleMove = rookMove(chessGame, pieceName, color);
-
+    console.log(possibleMove);
     setPossibleMove(possibleMove);
+
     /*  const nextpos =
       color === "white"
         ? pieceName[0].concat(parseInt(pieceName[1]) + 1)
@@ -39,6 +40,21 @@ const Echiquier = () => {
     setChessGame(newChessGame); */
   };
 
+  const handleMove = (square) => {
+    const piece = chessGame.find((ele) => ele.name === pieceChoice).occupied;
+    const color = chessGame.find((ele) => ele.name === pieceChoice).color;
+    console.log(piece);
+    console.log(color);
+
+    const newChessGame = chessGame
+      .map((ele) =>
+        ele.name === pieceChoice ? { ...ele, occupied: "", color: "" } : ele
+      )
+      .map((x) =>
+        x.name === square ? { ...x, occupied: piece, color: color } : x
+      );
+    setChessGame(newChessGame);
+  };
   return (
     <Container>
       <ChessPlate>
@@ -53,6 +69,11 @@ const Echiquier = () => {
                 greenBorder={possibleMove.includes(letters[i].concat(n + 1))}
                 white={
                   (i % 2 === 0 && n % 2 === 0) || (i % 2 !== 0 && n % 2 !== 0)
+                }
+                onClick={
+                  possibleMove.includes(letters[i].concat(n + 1))
+                    ? () => handleMove(letters[i].concat(n + 1))
+                    : () => ""
                 }
               >
                 {chessGame
