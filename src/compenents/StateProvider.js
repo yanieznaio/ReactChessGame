@@ -43,7 +43,6 @@ const StateProvider = ({ children }) => {
     { h7: ["pawn", "black", <FaChessPawn />] },
   ];
 
-
   const createCaseName = () => {
     var arr = [];
     const letters = "abcdefgh";
@@ -70,12 +69,13 @@ const StateProvider = ({ children }) => {
           .join(""),
       };
     }
+
     return object;
   };
 
   const [chessGame, setChessGame] = useState(createObject());
   const [pieceChoice, setPieceChoice] = useState();
-  const [possibleMove, setPossibleMove] = useState([])
+  const [possibleMove, setPossibleMove] = useState([]);
   return (
     <StateContext.Provider
       value={{
@@ -84,8 +84,7 @@ const StateProvider = ({ children }) => {
         pieceChoice,
         setPieceChoice,
         possibleMove,
-        setPossibleMove
-        
+        setPossibleMove,
       }}
     >
       {children}
