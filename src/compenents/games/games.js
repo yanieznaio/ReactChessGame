@@ -36,7 +36,35 @@ const rookMove = (chessGame, pieceName, color) => {
       }
     }
 
-    return [...forward, ...downward];
+    //left
+    if (
+      (color === "white" && pieceName[0] !== "a") ||
+      (color === "black") & (pieceName[0] != "h")
+    ) {
+      for (let i = letters.indexOf(pieceName[0]) - 1; i >= 0; i--) {
+        var square = letters[i].concat(pieceName[1]);
+        if (!checkIfMovePossible(square, color)) break;
+        console.log(square);
+
+        color === "white" ? left.push(square) : right.push(square);
+      }
+    }
+
+    //right
+    if (
+      (color === "white" && pieceName[0] !== "h") ||
+      (color === "black") & (pieceName[0] != "a")
+    ) {
+      for (let i = letters.indexOf(pieceName[0]) + 1; i < 8; i++) {
+        var square = letters[i].concat(pieceName[1]);
+        if (!checkIfMovePossible(square, color)) break;
+        console.log(square);
+
+        color === "white" ? right.push(square) : left.push(square);
+      }
+    }
+
+    return [...forward, ...downward, ...left, ...right];
   }
 };
 
