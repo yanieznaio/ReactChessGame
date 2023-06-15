@@ -11,7 +11,7 @@ const StateProvider = ({ children }) => {
   const occupiedSquare = {
     a1: { piece: "rook", color: "white", icon: <TbChessRookFilled /> },
     b1: { piece: "knight", color: "white", icon: <FaChessKnight /> },
-    c1: { " piece": "bishop", color: "white", icon: <FaChessBishop /> },
+    c1: { piece: "bishop", color: "white", icon: <FaChessBishop /> },
     d1: { piece: "queen", color: "white", icon: <GiChessQueen /> },
     e1: { piece: "king", color: "white", icon: <GiChessKing /> },
     f1: { piece: "bishop", color: "white", icon: <FaChessBishop /> },
@@ -27,17 +27,17 @@ const StateProvider = ({ children }) => {
     h2: { piece: "pawn", color: "white", icon: <FaChessPawn /> },
     a8: { piece: "rook", color: "black", icon: <TbChessRookFilled /> },
     b8: { piece: "knight", color: "black", icon: <FaChessKnight /> },
-    c8: { " piece": "bishop", color: "black", icon: <FaChessBishop /> },
+    c8: { piece: "bishop", color: "black", icon: <FaChessBishop /> },
     d8: { piece: "queen", color: "black", icon: <GiChessQueen /> },
     e8: { piece: "king", color: "black", icon: <GiChessKing /> },
-    f8: { " piece": "bishop", color: "black", icon: <FaChessBishop /> },
+    f8: { piece: "bishop", color: "black", icon: <FaChessBishop /> },
     g8: { piece: "knight", color: "black", icon: <FaChessKnight /> },
     h8: { piece: "rook", color: "black", icon: <TbChessRookFilled /> },
     a7: { piece: "pawn", color: "black", icon: <FaChessPawn /> },
     b7: { piece: "pawn", color: "black", icon: <FaChessPawn /> },
     d7: { piece: "pawn", color: "black", icon: <FaChessPawn /> },
-    c7: { " piece": "pawn", color: "black", icon: <FaChessPawn /> },
-    f7: { " piece": "pawn", color: "black", icon: <FaChessPawn /> },
+    c7: { piece: "pawn", color: "black", icon: <FaChessPawn /> },
+    f7: { piece: "pawn", color: "black", icon: <FaChessPawn /> },
     e7: { piece: "pawn", color: "black", icon: <FaChessPawn /> },
     h7: { piece: "pawn", color: "black", icon: <FaChessPawn /> },
     g7: { piece: "pawn", color: "black", icon: <FaChessPawn /> },
@@ -64,7 +64,7 @@ const StateProvider = ({ children }) => {
         icon: occupiedSquare[caseName[i]]?.icon,
       };
     }
-    console.log(object);
+
     return object;
   };
 

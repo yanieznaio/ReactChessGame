@@ -32,7 +32,6 @@ const Echiquier = () => {
 
   const handleClick = (piece) => {
     setPieceChoice(piece);
-
     const newPossibleMove = rookMove(
       chessGame,
       piece,
@@ -40,62 +39,58 @@ const Echiquier = () => {
     );
 
     setPossibleMove(newPossibleMove[0]);
-
     setPossibleEat(newPossibleMove[1]);
   };
 
   const handleEat = (piece, color) => {
-    console.log(piece);
     color === "white"
-      ? setWinWhite([...winWhite, piece[2]])
-      : setWinBlack([...winBlack, piece[2]]);
-    console.log(winWhite);
-    console.log(winBlack);
+      ? setWinWhite([...winWhite, piece.icon])
+      : setWinBlack([...winBlack, piece.icon]);
   };
 
   const handleMove = (square) => {
     if (possibleMove.includes(square)) {
       const piece = chessGame[pieceChoice];
-      setChessGame((prevState) => ({
-        ...prevState,
-        pieceChoice: {
-          occupiedPiece: undefined,
-          occupiedColor: undefined,
-          icon: undefined,
+
+      setChessGame({
+        ...chessGame,
+        [pieceChoice]: {
+          occupiedPiece: "",
+          occupiedColor: "",
+          icon: "",
         },
-        square: {
+        [square]: {
           occupiedPiece: piece.occupiedPiece,
           occupiedColor: piece.occupiedColor,
           icon: piece.icon,
         },
-      }));
-
+      });
+      console.log(chessGame);
       setPossibleMove([]);
       setPossibleEat([]);
     } else if (possibleEat.includes(square)) {
       const piece = chessGame[square];
 
       handleEat(piece, piece.occupiedColor);
-      setChessGame((prevState) => ({
-        ...prevState,
-        pieceChoice: {
+      setChessGame({
+        ...chessGame,
+        [pieceChoice]: {
           occupiedPiece: undefined,
           occupiedColor: undefined,
           icon: undefined,
         },
-        square: {
+        [square]: {
           occupiedPiece: piece.occupiedPiece,
           occupiedColor: piece.occupiedColor,
           icon: piece.icon,
         },
-      }));
-
+      });
+      console.log(chessGame);
       setPossibleMove([]);
       setPossibleEat([]);
     } else {
       return "";
     }
-    console.log(chessGame);
   };
   return (
     <Container>

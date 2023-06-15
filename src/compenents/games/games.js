@@ -8,9 +8,7 @@ const rookMove = (chessGame, pieceName, color) => {
   const letters = "abcdefgh";
 
   const checkIfcanBeEat = (square) => {
-    const place = chessGame[square];
-
-    return place.color !== color;
+    return chessGame[square].occupiedColor !== color;
   };
 
   const checkIfMovePossible = (square) => {
