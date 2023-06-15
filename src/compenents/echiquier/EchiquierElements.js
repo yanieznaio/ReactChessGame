@@ -5,6 +5,7 @@ export const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 `;
 export const ChessPlate = styled.div`
   display: grid;
@@ -32,14 +33,34 @@ export const Row = styled.div`
   background: ${(props) => (props.white ? "#394867" : "#B2C8DF")};
   color: ${(props) => props.color};
   font-size: 1.2rem;
-  border: ${props => props.greenBorder ? '4px solid green' : ''}
-  
-  
+  border: ${(props) => (props.greenBorder ? "4px solid green" : "")};
 `;
 
 export const Piece = styled.p`
-  color: ${(props) => props.green ? 'green' : props.color};
+  color: ${(props) => (props.green ? "green" : props.color)};
   cursor: grab;
-  
+`;
 
+export const BlackInfo = styled.div`
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 200px;
+  background: #8e9eab;
+  color: white;
+`;
+export const WhiteInfo = styled.div`
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 200px;
+  background: #8e9eab;
+`;
+
+export const ScoreWhite = styled.h3`
+  color: white;
+`;
+
+export const ScoreBlack = styled.h3`
+  color: black;
 `;

@@ -7,6 +7,12 @@ const rookMove = (chessGame, pieceName, color) => {
   var canEat = [];
   const letters = "abcdefgh";
 
+  const checkIfcanBeEat = (square) => {
+    const place = chessGame.find((ele) => ele.name === square);
+
+    return place.color !== color;
+  };
+
   const checkIfMovePossible = (square, color) => {
     const isOcuppied = chessGame.find((ele) => ele.name === square);
     return isOcuppied.occupied === undefined;
@@ -20,7 +26,10 @@ const rookMove = (chessGame, pieceName, color) => {
     for (let i = parseInt(pieceName[1]) + 1; i <= 8; i++) {
       var square = pieceName[0].concat(i);
       if (!checkIfMovePossible(square, color)) {
-        canEat.push(square);
+        if (checkIfcanBeEat(square)) {
+          canEat.push(square);
+        }
+
         break;
       }
 
@@ -35,7 +44,9 @@ const rookMove = (chessGame, pieceName, color) => {
         var square = pieceName[0].concat(i);
 
         if (!checkIfMovePossible(square, color)) {
-          canEat.push(square);
+          if (checkIfcanBeEat(square)) {
+            canEat.push(square);
+          }
           break;
         }
 
@@ -51,7 +62,9 @@ const rookMove = (chessGame, pieceName, color) => {
       for (let i = letters.indexOf(pieceName[0]) - 1; i >= 0; i--) {
         var square = letters[i].concat(pieceName[1]);
         if (!checkIfMovePossible(square, color)) {
-          canEat.push(square);
+          if (checkIfcanBeEat(square)) {
+            canEat.push(square);
+          }
           break;
         }
 
@@ -67,7 +80,9 @@ const rookMove = (chessGame, pieceName, color) => {
       for (let i = letters.indexOf(pieceName[0]) + 1; i < 8; i++) {
         var square = letters[i].concat(pieceName[1]);
         if (!checkIfMovePossible(square, color)) {
-          canEat.push(square);
+          if (checkIfcanBeEat(square)) {
+            canEat.push(square);
+          }
           break;
         }
 

@@ -1,4 +1,14 @@
-import { Container, ChessPlate, Column, Row, Piece } from "./EchiquierElements";
+import {
+  Container,
+  ChessPlate,
+  Column,
+  Row,
+  Piece,
+  WhiteInfo,
+  BlackInfo,
+  ScoreWhite,
+  ScoreBlack,
+} from "./EchiquierElements";
 import { FaChessPawn } from "react-icons/fa";
 import { useContext } from "react";
 import { StateContext } from "../StateProvider";
@@ -13,6 +23,10 @@ const Echiquier = () => {
     setPossibleMove,
     possibleEat,
     setPossibleEat,
+    winWhite,
+    setWinWhite,
+    setWinBlack,
+    winBlack,
   } = useContext(StateContext);
   const letters = "abcdefgh";
 
@@ -21,14 +35,23 @@ const Echiquier = () => {
     //const possibleMove = checkPossibleMove(pieceName)
     const color = chessGame.filter((ele) => ele.name === pieceName)[0].color;
     const newPossibleMove = rookMove(chessGame, pieceName, color);
-    console.log(newPossibleMove);
+
     setPossibleMove(newPossibleMove[0]);
-    console.log(possibleMove);
+
     setPossibleEat(newPossibleMove[1]);
   };
 
+  const handleEat = (piece, color) => {
+    console.log(piece);
+    color === "white"
+      ? setWinWhite([...winWhite, piece[2]])
+      : setWinBlack([...winBlack, piece[2]]);
+    console.log(winWhite);
+    console.log(winBlack);
+  };
+
   const handleMove = (square) => {
-    if (possibleMove.includes(square) || possibleEat.includes(square)) {
+    if (possibleMove.includes(square)) {
       const piece = chessGame.find((ele) => ele.name === pieceChoice).occupied;
       const color = chessGame.find((ele) => ele.name === pieceChoice).color;
 
@@ -41,6 +64,24 @@ const Echiquier = () => {
         .map((x) =>
           x.name === square ? { ...x, occupied: piece, color: color } : x
         );
+      setChessGame(newChessGame);
+      setPossibleMove([]);
+      setPossibleEat([]);
+    } else if (possibleEat.includes(square)) {
+      const piece = chessGame.find((ele) => ele.name === pieceChoice).occupied;
+      const color = chessGame.find((ele) => ele.name === pieceChoice).color;
+      const pieceEat = chessGame.find((ele) => ele.name === square).occupied;
+      handleEat(pieceEat, color);
+      const newChessGame = chessGame
+        .map((ele) =>
+          ele.name === pieceChoice
+            ? { ...ele, occupied: undefined, color: "" }
+            : ele
+        )
+        .map((x) =>
+          x.name === square ? { ...x, occupied: piece, color: color } : x
+        );
+
       setChessGame(newChessGame);
       setPossibleMove([]);
       setPossibleEat([]);
@@ -83,6 +124,14 @@ const Echiquier = () => {
           </Column>
         ))}
       </ChessPlate>
+      <BlackInfo>
+        <ScoreBlack>Black win: {winBlack.length}</ScoreBlack>
+        <p>{winBlack}</p>
+      </BlackInfo>
+      <WhiteInfo>
+        <ScoreWhite>White win : {winWhite.length}</ScoreWhite>
+        <p>{winWhite}</p>
+      </WhiteInfo>
     </Container>
   );
 };
