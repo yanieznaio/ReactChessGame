@@ -8,40 +8,40 @@ import { GiChessKing } from "react-icons/gi";
 export const StateContext = createContext();
 
 const StateProvider = ({ children }) => {
-  const occupiedSquare = [
-    { a1: ["rook", "white", <TbChessRookFilled />] },
-    { b1: ["knight", "white", <FaChessKnight />] },
-    { c1: ["bishop", "white", <FaChessBishop />] },
-    { d1: ["queen", "white", <GiChessQueen />] },
-    { e1: ["king", "white", <GiChessKing />] },
-    { f1: ["bishop", "white", <FaChessBishop />] },
-    { g1: ["knight", "white", <FaChessKnight />] },
-    { h1: ["rook", "white", <TbChessRookFilled />] },
-    { a2: ["pawn", "white", <FaChessPawn />] },
-    { b2: ["pawn", "white", <FaChessPawn />] },
-    { c2: ["pawn", "white", <FaChessPawn />] },
-    { d2: ["pawn", "white", <FaChessPawn />] },
-    { e2: ["pawn", "white", <FaChessPawn />] },
-    { f2: ["pawn", "white", <FaChessPawn />] },
-    { g2: ["pawn", "white", <FaChessPawn />] },
-    { h2: ["pawn", "white", <FaChessPawn />] },
-    { a8: ["rook", "black", <TbChessRookFilled />] },
-    { b8: ["knight", "black", <FaChessKnight />] },
-    { c8: ["bishop", "black", <FaChessBishop />] },
-    { d8: ["queen", "black", <GiChessQueen />] },
-    { e8: ["king", "black", <GiChessKing />] },
-    { f8: ["bishop", "black", <FaChessBishop />] },
-    { g8: ["knight", "black", <FaChessKnight />] },
-    { h8: ["rook", "black", <TbChessRookFilled />] },
-    { a7: ["pawn", "black", <FaChessPawn />] },
-    { b7: ["pawn", "black", <FaChessPawn />] },
-    { c7: ["pawn", "black", <FaChessPawn />] },
-    { d7: ["pawn", "black", <FaChessPawn />] },
-    { e7: ["pawn", "black", <FaChessPawn />] },
-    { f7: ["pawn", "black", <FaChessPawn />] },
-    { g7: ["pawn", "black", <FaChessPawn />] },
-    { h7: ["pawn", "black", <FaChessPawn />] },
-  ];
+  const occupiedSquare = {
+    a1: { piece: "rook", color: "white", icon: <TbChessRookFilled /> },
+    b1: { piece: "knight", color: "white", icon: <FaChessKnight /> },
+    c1: { " piece": "bishop", color: "white", icon: <FaChessBishop /> },
+    d1: { piece: "queen", color: "white", icon: <GiChessQueen /> },
+    e1: { piece: "king", color: "white", icon: <GiChessKing /> },
+    f1: { piece: "bishop", color: "white", icon: <FaChessBishop /> },
+    g1: { piece: "knight", color: "white", icon: <FaChessKnight /> },
+    h1: { piece: "rook", color: "white", icon: <TbChessRookFilled /> },
+    a2: { piece: "pawn", color: "white", icon: <FaChessPawn /> },
+    b2: { piece: "pawn", color: "white", icon: <FaChessPawn /> },
+    c2: { piece: "pawn", color: "white", icon: <FaChessPawn /> },
+    d2: { piece: "pawn", color: "white", icon: <FaChessPawn /> },
+    e2: { piece: "pawn", color: "white", icon: <FaChessPawn /> },
+    f2: { piece: "pawn", color: "white", icon: <FaChessPawn /> },
+    g2: { piece: "pawn", color: "white", icon: <FaChessPawn /> },
+    h2: { piece: "pawn", color: "white", icon: <FaChessPawn /> },
+    a8: { piece: "rook", color: "black", icon: <TbChessRookFilled /> },
+    b8: { piece: "knight", color: "black", icon: <FaChessKnight /> },
+    c8: { " piece": "bishop", color: "black", icon: <FaChessBishop /> },
+    d8: { piece: "queen", color: "black", icon: <GiChessQueen /> },
+    e8: { piece: "king", color: "black", icon: <GiChessKing /> },
+    f8: { " piece": "bishop", color: "black", icon: <FaChessBishop /> },
+    g8: { piece: "knight", color: "black", icon: <FaChessKnight /> },
+    h8: { piece: "rook", color: "black", icon: <TbChessRookFilled /> },
+    a7: { piece: "pawn", color: "black", icon: <FaChessPawn /> },
+    b7: { piece: "pawn", color: "black", icon: <FaChessPawn /> },
+    d7: { piece: "pawn", color: "black", icon: <FaChessPawn /> },
+    c7: { " piece": "pawn", color: "black", icon: <FaChessPawn /> },
+    f7: { " piece": "pawn", color: "black", icon: <FaChessPawn /> },
+    e7: { piece: "pawn", color: "black", icon: <FaChessPawn /> },
+    h7: { piece: "pawn", color: "black", icon: <FaChessPawn /> },
+    g7: { piece: "pawn", color: "black", icon: <FaChessPawn /> },
+  };
 
   const createCaseName = () => {
     var arr = [];
@@ -56,20 +56,15 @@ const StateProvider = ({ children }) => {
 
   const createObject = () => {
     const caseName = createCaseName();
-    var object = [];
+    var object = {};
     for (let i = 0; i < 64; i++) {
-      object[i] = {
-        name: caseName[i],
-        occupied: occupiedSquare
-          .filter((square) => square[caseName[i]])
-          .map((square) => square[caseName[i]])[0],
-        color: occupiedSquare
-          .filter((square) => square[caseName[i]])
-          .map((square) => square[caseName[i]][1])
-          .join(""),
+      object[caseName[i]] = {
+        occupiedPiece: occupiedSquare[caseName[i]]?.piece,
+        occupiedColor: occupiedSquare[caseName[i]]?.color,
+        icon: occupiedSquare[caseName[i]]?.icon,
       };
     }
-
+    console.log(object);
     return object;
   };
 

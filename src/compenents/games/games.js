@@ -8,14 +8,13 @@ const rookMove = (chessGame, pieceName, color) => {
   const letters = "abcdefgh";
 
   const checkIfcanBeEat = (square) => {
-    const place = chessGame.find((ele) => ele.name === square);
+    const place = chessGame[square];
 
     return place.color !== color;
   };
 
-  const checkIfMovePossible = (square, color) => {
-    const isOcuppied = chessGame.find((ele) => ele.name === square);
-    return isOcuppied.occupied === undefined;
+  const checkIfMovePossible = (square) => {
+    return chessGame[square].occupiedPiece === undefined;
   };
 
   //forward //backward for black
