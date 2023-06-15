@@ -11,7 +11,9 @@ export const ChessPlate = styled.div`
   display: grid;
 
   height: 50%;
-  border: 1px solid;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
   grid-template-columns: repeat(8, 70px);
 
   @media screen and (max-width: 800px) {
@@ -19,8 +21,6 @@ export const ChessPlate = styled.div`
 `;
 
 export const Column = styled.div`
-  border: 1px solid;
-  background: pink;
   display: flex;
 
   flex-direction: column-reverse;
@@ -30,9 +30,10 @@ export const Column = styled.div`
 export const Row = styled.div`
   width: 100%;
   height: 70px;
-  background: ${(props) => (props.white ? "#394867" : "#B2C8DF")};
+  background: ${(props) => (props.white ? "#B1B2FF" : "#D2DAFF")};
   color: ${(props) => props.color};
   font-size: 1.2rem;
+  box-sizing: border-box;
   border: ${(props) => (props.greenBorder ? "4px solid green" : "")};
 `;
 
@@ -46,15 +47,17 @@ export const BlackInfo = styled.div`
   right: 0px;
   top: 0px;
   width: 200px;
-  background: #8e9eab;
+  background: rgb(84, 84, 197, 0.4);
   color: white;
+  border-radius: 12px;
 `;
 export const WhiteInfo = styled.div`
   position: absolute;
   bottom: 0px;
   right: 0px;
   width: 200px;
-  background: #8e9eab;
+  background: rgb(84, 84, 197, 0.4);
+  border-radius: 12px;
 `;
 
 export const ScoreWhite = styled.h3`
