@@ -117,7 +117,7 @@ const Echiquier = () => {
                 <Piece
                   onClick={() => handleClick(letters[i].concat(n + 1))}
                   green={pieceChoice === letters[i].concat(n + 1)}
-                  color={chessGame[letters[i].concat(n + 1)]?.color}
+                  color={chessGame[letters[i].concat(n + 1)]?.occupiedColor}
                 >
                   {chessGame[letters[i].concat(n + 1)].icon}
                 </Piece>
