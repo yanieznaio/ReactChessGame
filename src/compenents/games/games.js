@@ -4,6 +4,7 @@ const rookMove = (chessGame, pieceName, color) => {
   var downward = [];
   var left = [];
   var right = [];
+  var canEat = [];
   const letters = "abcdefgh";
 
   const checkIfMovePossible = (square, color) => {
@@ -18,7 +19,10 @@ const rookMove = (chessGame, pieceName, color) => {
   ) {
     for (let i = parseInt(pieceName[1]) + 1; i <= 8; i++) {
       var square = pieceName[0].concat(i);
-      if (!checkIfMovePossible(square, color)) break;
+      if (!checkIfMovePossible(square, color)) {
+        canEat.push(square);
+        break;
+      }
 
       color === "white" ? forward.push(square) : downward.push(square);
     }
@@ -30,7 +34,10 @@ const rookMove = (chessGame, pieceName, color) => {
       for (let i = parseInt(pieceName[1]) - 1; i > 0; i--) {
         var square = pieceName[0].concat(i);
 
-        if (!checkIfMovePossible(square, color)) break;
+        if (!checkIfMovePossible(square, color)) {
+          canEat.push(square);
+          break;
+        }
 
         color === "white" ? downward.push(square) : forward.push(square);
       }
@@ -43,8 +50,10 @@ const rookMove = (chessGame, pieceName, color) => {
     ) {
       for (let i = letters.indexOf(pieceName[0]) - 1; i >= 0; i--) {
         var square = letters[i].concat(pieceName[1]);
-        if (!checkIfMovePossible(square, color)) break;
-        console.log(square);
+        if (!checkIfMovePossible(square, color)) {
+          canEat.push(square);
+          break;
+        }
 
         color === "white" ? left.push(square) : right.push(square);
       }
@@ -57,14 +66,17 @@ const rookMove = (chessGame, pieceName, color) => {
     ) {
       for (let i = letters.indexOf(pieceName[0]) + 1; i < 8; i++) {
         var square = letters[i].concat(pieceName[1]);
-        if (!checkIfMovePossible(square, color)) break;
-        console.log(square);
+        if (!checkIfMovePossible(square, color)) {
+          canEat.push(square);
+          break;
+        }
 
         color === "white" ? right.push(square) : left.push(square);
       }
     }
 
-    return [...forward, ...downward, ...left, ...right];
+    //ajouter un tableau des pieces
+    return [[...forward, ...downward, ...left, ...right], [...canEat]];
   }
 };
 

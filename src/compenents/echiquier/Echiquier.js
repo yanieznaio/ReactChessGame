@@ -11,6 +11,8 @@ const Echiquier = () => {
     setPieceChoice,
     possibleMove,
     setPossibleMove,
+    possibleEat,
+    setPossibleEat,
   } = useContext(StateContext);
   const letters = "abcdefgh";
 
@@ -18,42 +20,33 @@ const Echiquier = () => {
     setPieceChoice(pieceName);
     //const possibleMove = checkPossibleMove(pieceName)
     const color = chessGame.filter((ele) => ele.name === pieceName)[0].color;
-    const piece = chessGame.filter((ele) => ele.name === pieceName)[0].occupied;
-    const possibleMove = rookMove(chessGame, pieceName, color);
+    const newPossibleMove = rookMove(chessGame, pieceName, color);
+    console.log(newPossibleMove);
+    setPossibleMove(newPossibleMove[0]);
     console.log(possibleMove);
-    setPossibleMove(possibleMove);
-
-    /*  const nextpos =
-      color === "white"
-        ? pieceName[0].concat(parseInt(pieceName[1]) + 1)
-        : pieceName[0].concat(parseInt(pieceName[1]) - 1);
-
-    const newChessGame = chessGame
-      .map((ele) =>
-        ele.name === pieceName ? { ...ele, occupied: "", color: "" } : ele
-      )
-      .map((x) =>
-        x.name === nextpos ? { ...x, occupied: piece, color: color } : x
-      );
-
-    console.log(newChessGame);
-    setChessGame(newChessGame); */
+    setPossibleEat(newPossibleMove[1]);
   };
 
   const handleMove = (square) => {
-    const piece = chessGame.find((ele) => ele.name === pieceChoice).occupied;
-    const color = chessGame.find((ele) => ele.name === pieceChoice).color;
-    console.log(piece);
-    console.log(color);
+    if (possibleMove.includes(square) || possibleEat.includes(square)) {
+      const piece = chessGame.find((ele) => ele.name === pieceChoice).occupied;
+      const color = chessGame.find((ele) => ele.name === pieceChoice).color;
 
-    const newChessGame = chessGame
-      .map((ele) =>
-        ele.name === pieceChoice ? { ...ele, occupied: "", color: "" } : ele
-      )
-      .map((x) =>
-        x.name === square ? { ...x, occupied: piece, color: color } : x
-      );
-    setChessGame(newChessGame);
+      const newChessGame = chessGame
+        .map((ele) =>
+          ele.name === pieceChoice
+            ? { ...ele, occupied: undefined, color: "" }
+            : ele
+        )
+        .map((x) =>
+          x.name === square ? { ...x, occupied: piece, color: color } : x
+        );
+      setChessGame(newChessGame);
+      setPossibleMove([]);
+      setPossibleEat([]);
+    } else {
+      return "";
+    }
   };
   return (
     <Container>
@@ -70,11 +63,7 @@ const Echiquier = () => {
                 white={
                   (i % 2 === 0 && n % 2 === 0) || (i % 2 !== 0 && n % 2 !== 0)
                 }
-                onClick={
-                  possibleMove.includes(letters[i].concat(n + 1))
-                    ? () => handleMove(letters[i].concat(n + 1))
-                    : () => ""
-                }
+                onClick={() => handleMove(letters[i].concat(n + 1))}
               >
                 {chessGame
                   .filter((ele) => ele.name == letters[i].concat(n + 1))

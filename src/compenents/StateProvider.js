@@ -76,6 +76,7 @@ const StateProvider = ({ children }) => {
   const [chessGame, setChessGame] = useState(createObject());
   const [pieceChoice, setPieceChoice] = useState();
   const [possibleMove, setPossibleMove] = useState([]);
+  const [possibleEat, setPossibleEat] = useState([]);
   return (
     <StateContext.Provider
       value={{
@@ -85,6 +86,8 @@ const StateProvider = ({ children }) => {
         setPieceChoice,
         possibleMove,
         setPossibleMove,
+        possibleEat,
+        setPossibleEat,
       }}
     >
       {children}
