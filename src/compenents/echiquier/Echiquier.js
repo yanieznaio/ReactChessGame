@@ -14,6 +14,7 @@ import { FaChessPawn } from "react-icons/fa";
 import { useContext } from "react";
 import { StateContext } from "../StateProvider";
 import { rookMove } from "../games/games.js";
+import { bishopMove } from "../games/bishop";
 const Echiquier = () => {
   const {
     chessGame,
@@ -36,6 +37,11 @@ const Echiquier = () => {
   const handleClick = (piece) => {
     if (chessGame[piece].occupiedColor === colorTurn) {
       setPieceChoice(piece);
+      const newbishopmove = bishopMove(
+        chessGame,
+        piece,
+        chessGame[piece].occupiedColor
+      );
       const newPossibleMove = rookMove(
         chessGame,
         piece,
@@ -71,7 +77,7 @@ const Echiquier = () => {
           icon: piece.icon,
         },
       });
-      console.log(chessGame);
+
       setPossibleMove([]);
       setPossibleEat([]);
       setColorTurn(colorTurn === "white" ? "black" : "white");
@@ -91,7 +97,7 @@ const Echiquier = () => {
           icon: piece.icon,
         },
       });
-      console.log(chessGame);
+
       setPossibleMove([]);
       setPossibleEat([]);
       setColorTurn(colorTurn === "white" ? "black" : "white");

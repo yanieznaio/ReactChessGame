@@ -1,9 +1,13 @@
-const pawnMoove = (chessGame, PiecePosition, color) => {
+const queenMoove = (chessGame, PiecePosition, color) => {
   var diagonalLeftUp = [];
+  var diagonalLeftDown = [];
   var diagonalRightUp = [];
-  var up = [];
+  var diagonalRightDown = [];
+  var forward = [];
+  var downward = [];
+  var left = [];
+  var right = [];
   var canEat = [];
-
   const letters = "abcdefgh";
 
   const checkIfcanBeEat = (square) => {
@@ -15,4 +19,4 @@ const pawnMoove = (chessGame, PiecePosition, color) => {
   };
 };
 
-export { pawnMoove };
+export { queenMoove };

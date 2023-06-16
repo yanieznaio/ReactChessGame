@@ -1,7 +1,8 @@
-const pawnMoove = (chessGame, PiecePosition, color) => {
-  var diagonalLeftUp = [];
-  var diagonalRightUp = [];
-  var up = [];
+const knightMoove = (chessGame, PiecePosition, color) => {
+  var leftUp = [];
+  var leftDown = [];
+  var rightUp = [];
+  var rightDown = [];
   var canEat = [];
 
   const letters = "abcdefgh";
@@ -15,4 +16,4 @@ const pawnMoove = (chessGame, PiecePosition, color) => {
   };
 };
 
-export { pawnMoove };
+export { knightMoove };
