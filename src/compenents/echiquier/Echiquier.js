@@ -8,6 +8,7 @@ import {
   BlackInfo,
   ScoreWhite,
   ScoreBlack,
+  ColorTurn,
 } from "./EchiquierElements";
 import { FaChessPawn } from "react-icons/fa";
 import { useContext } from "react";
@@ -27,19 +28,24 @@ const Echiquier = () => {
     setWinWhite,
     setWinBlack,
     winBlack,
+    colorTurn,
+    setColorTurn,
   } = useContext(StateContext);
   const letters = "abcdefgh";
 
   const handleClick = (piece) => {
-    setPieceChoice(piece);
-    const newPossibleMove = rookMove(
-      chessGame,
-      piece,
-      chessGame[piece].occupiedColor
-    );
+    if (chessGame[piece].occupiedColor === colorTurn) {
+      setPieceChoice(piece);
+      const newPossibleMove = rookMove(
+        chessGame,
+        piece,
+        chessGame[piece].occupiedColor
+      );
 
-    setPossibleMove(newPossibleMove[0]);
-    setPossibleEat(newPossibleMove[1]);
+      setPossibleMove(newPossibleMove[0]);
+      setPossibleEat(newPossibleMove[1]);
+    }
+    return;
   };
 
   const handleEat = (piece, color) => {
@@ -68,9 +74,9 @@ const Echiquier = () => {
       console.log(chessGame);
       setPossibleMove([]);
       setPossibleEat([]);
+      setColorTurn(colorTurn === "white" ? "black" : "white");
     } else if (possibleEat.includes(square)) {
-      const piece = chessGame[square];
-
+      const piece = chessGame[pieceChoice];
       handleEat(piece, piece.occupiedColor);
       setChessGame({
         ...chessGame,
@@ -88,12 +94,14 @@ const Echiquier = () => {
       console.log(chessGame);
       setPossibleMove([]);
       setPossibleEat([]);
+      setColorTurn(colorTurn === "white" ? "black" : "white");
     } else {
-      return "";
+      return;
     }
   };
   return (
     <Container>
+      <ColorTurn>Player: {colorTurn}</ColorTurn>
       <ChessPlate>
         {[...Array(8)].map((x, i) => (
           <Column key={i} name={letters[i]}>

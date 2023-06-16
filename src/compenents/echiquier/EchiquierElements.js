@@ -7,6 +7,13 @@ export const Container = styled.div`
   justify-content: center;
   position: relative;
 `;
+
+export const ColorTurn = styled.h2`
+  color: green;
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
 export const ChessPlate = styled.div`
   display: grid;
 

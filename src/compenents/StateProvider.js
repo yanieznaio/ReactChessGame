@@ -74,6 +74,7 @@ const StateProvider = ({ children }) => {
   const [possibleEat, setPossibleEat] = useState([]);
   const [winWhite, setWinWhite] = useState([]);
   const [winBlack, setWinBlack] = useState([]);
+  const [colorTurn, setColorTurn] = useState("white");
   return (
     <StateContext.Provider
       value={{
@@ -89,6 +90,8 @@ const StateProvider = ({ children }) => {
         setWinWhite,
         winBlack,
         setWinBlack,
+        colorTurn,
+        setColorTurn,
       }}
     >
       {children}
