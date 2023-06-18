@@ -37,19 +37,24 @@ const Echiquier = () => {
   const handleClick = (piece) => {
     if (chessGame[piece].occupiedColor === colorTurn) {
       setPieceChoice(piece);
-      const newbishopmove = bishopMove(
-        chessGame,
-        piece,
-        chessGame[piece].occupiedColor
-      );
-      const newPossibleMove = rookMove(
-        chessGame,
-        piece,
-        chessGame[piece].occupiedColor
-      );
+      var newMove;
+      console.log(chessGame[piece].occupiedPiece);
+      switch (chessGame[piece].occupiedPiece) {
+        case "bishop":
+          newMove = bishopMove(
+            chessGame,
+            piece,
+            chessGame[piece].occupiedColor
+          );
+          break;
+        default:
+          newMove = rookMove(chessGame, piece, chessGame[piece].occupiedColor);
+      }
 
-      setPossibleMove(newPossibleMove[0]);
-      setPossibleEat(newPossibleMove[1]);
+      console.log(newMove);
+
+      setPossibleMove(newMove[0]);
+      setPossibleEat(newMove[1]);
     }
     return;
   };
@@ -78,7 +83,6 @@ const Echiquier = () => {
         },
       });
 
-      setPossibleMove([]);
       setPossibleEat([]);
       setColorTurn(colorTurn === "white" ? "black" : "white");
     } else if (possibleEat.includes(square)) {
