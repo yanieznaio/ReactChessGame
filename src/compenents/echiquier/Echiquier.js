@@ -15,6 +15,7 @@ import { useContext } from "react";
 import { StateContext } from "../StateProvider";
 import { rookMove } from "../games/games.js";
 import { bishopMove } from "../games/bishop";
+import { knightMoove } from "../games/knight";
 const Echiquier = () => {
   const {
     chessGame,
@@ -42,6 +43,13 @@ const Echiquier = () => {
       switch (chessGame[piece].occupiedPiece) {
         case "bishop":
           newMove = bishopMove(
+            chessGame,
+            piece,
+            chessGame[piece].occupiedColor
+          );
+          break;
+        case "knight":
+          newMove = knightMoove(
             chessGame,
             piece,
             chessGame[piece].occupiedColor
