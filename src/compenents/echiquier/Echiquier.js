@@ -17,6 +17,7 @@ import { rookMove } from "../games/games.js";
 import { bishopMove } from "../games/bishop";
 import { knightMoove } from "../games/knight";
 import { pawnMoove } from "../games/pawn";
+import { kingMoove } from "../games/king";
 const Echiquier = () => {
   const {
     chessGame,
@@ -58,6 +59,9 @@ const Echiquier = () => {
           break;
         case "rook":
           newMove = rookMove(chessGame, piece, chessGame[piece].occupiedColor);
+          break;
+        case "king":
+          newMove = kingMoove(chessGame, piece, chessGame[piece].occupiedColor)
           break;
         default:
           newMove = pawnMoove(chessGame, piece, chessGame[piece].occupiedColor);
