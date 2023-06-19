@@ -16,6 +16,7 @@ import { StateContext } from "../StateProvider";
 import { rookMove } from "../games/games.js";
 import { bishopMove } from "../games/bishop";
 import { knightMoove } from "../games/knight";
+import { pawnMoove } from "../games/pawn";
 const Echiquier = () => {
   const {
     chessGame,
@@ -55,8 +56,11 @@ const Echiquier = () => {
             chessGame[piece].occupiedColor
           );
           break;
-        default:
+        case "rook":
           newMove = rookMove(chessGame, piece, chessGame[piece].occupiedColor);
+          break;
+        default:
+          newMove = pawnMoove(chessGame, piece, chessGame[piece].occupiedColor);
       }
 
       console.log(newMove);
