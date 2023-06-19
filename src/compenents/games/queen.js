@@ -1,22 +1,14 @@
-const queenMoove = (chessGame, PiecePosition, color) => {
-  var diagonalLeftUp = [];
-  var diagonalLeftDown = [];
-  var diagonalRightUp = [];
-  var diagonalRightDown = [];
-  var forward = [];
-  var downward = [];
-  var left = [];
-  var right = [];
-  var canEat = [];
-  const letters = "abcdefgh";
+import { bishopMove } from "./bishop";
+import { rookMove } from "./games";
 
-  const checkIfcanBeEat = (square) => {
-    return chessGame[square].occupiedColor !== color;
-  };
+const queenMoove = (chessGame, piecePosition, color) => {
+  var diagonalMove = bishopMove(chessGame, piecePosition, color);
+  var rookmove = rookMove(chessGame, piecePosition, color);
 
-  const checkIfMovePossible = (square) => {
-    return chessGame[square].occupiedPiece === undefined;
-  };
+  return [
+    [...diagonalMove[0], ...rookmove[0]],
+    [...diagonalMove[1], ...rookmove[1]],
+  ];
 };
 
 export { queenMoove };
