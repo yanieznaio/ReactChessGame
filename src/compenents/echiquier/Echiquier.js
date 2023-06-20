@@ -85,8 +85,8 @@ const Echiquier = () => {
 
   const handleEat = (piece, color) => {
     color === "white"
-      ? setWinWhite([...winWhite, piece.icon])
-      : setWinBlack([...winBlack, piece.icon]);
+      ? setWinBlack([...winWhite, piece.icon])
+      : setWinWhite([...winBlack, piece.icon]);
   };
 
   const handleMove = (square) => {
@@ -111,7 +111,7 @@ const Echiquier = () => {
       setColorTurn(colorTurn === "white" ? "black" : "white");
     } else if (possibleEat.includes(square)) {
       const piece = chessGame[pieceChoice];
-      handleEat(piece, piece.occupiedColor);
+      handleEat(chessGame[square], chessGame[square].occupiedColor);
       setChessGame({
         ...chessGame,
         [pieceChoice]: {
