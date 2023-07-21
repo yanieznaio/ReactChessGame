@@ -3,16 +3,25 @@ export const Container = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
 `;
 
+export const InfoContainer = styled.div`
+  display: flex;
+  width: 100%;
+  background: rgb(84, 84, 197, 0.4);
+  gap: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: space-between;
+`;
 export const ColorTurn = styled.h2`
   color: green;
-  position: absolute;
-  top: 0;
-  left: 0;
+  font-size: 1rem;
 `;
 export const ChessPlate = styled.div`
   display: grid;
@@ -50,27 +59,23 @@ export const Piece = styled.p`
 `;
 
 export const BlackInfo = styled.div`
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  width: 200px;
-  background: rgb(84, 84, 197, 0.4);
   color: white;
   border-radius: 12px;
+  display: flex;
+  align-items: center;
 `;
 export const WhiteInfo = styled.div`
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
-  width: 200px;
-  background: rgb(84, 84, 197, 0.4);
   border-radius: 12px;
+  display: flex;
+  align-items: center;
 `;
 
 export const ScoreWhite = styled.h3`
   color: white;
+  display: flex;
 `;
 
 export const ScoreBlack = styled.h3`
   color: black;
+  display: flex;
 `;

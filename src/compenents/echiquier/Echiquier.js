@@ -9,6 +9,7 @@ import {
   ScoreWhite,
   ScoreBlack,
   ColorTurn,
+  InfoContainer,
 } from "./EchiquierElements";
 import { FaChessPawn } from "react-icons/fa";
 import { useContext } from "react";
@@ -42,7 +43,6 @@ const Echiquier = () => {
     if (chessGame[piece].occupiedColor === colorTurn) {
       setPieceChoice(piece);
       var newMove;
-      console.log(chessGame[piece].occupiedPiece);
       switch (chessGame[piece].occupiedPiece) {
         case "bishop":
           newMove = bishopMove(
@@ -75,18 +75,16 @@ const Echiquier = () => {
           newMove = pawnMoove(chessGame, piece, chessGame[piece].occupiedColor);
       }
 
-      console.log(newMove);
-
       setPossibleMove(newMove[0]);
       setPossibleEat(newMove[1]);
     }
     return;
   };
 
-  const handleEat = (piece, color) => {
-    color === "white"
-      ? setWinBlack([...winWhite, piece.icon])
-      : setWinWhite([...winBlack, piece.icon]);
+  const handleEat = (piece) => {
+    colorTurn === "white"
+      ? setWinWhite([...winWhite, piece.icon])
+      : setWinBlack([...winBlack, piece.icon]);
   };
 
   const handleMove = (square) => {
@@ -108,10 +106,11 @@ const Echiquier = () => {
       });
 
       setPossibleEat([]);
+      setPossibleMove([]);
       setColorTurn(colorTurn === "white" ? "black" : "white");
     } else if (possibleEat.includes(square)) {
       const piece = chessGame[pieceChoice];
-      handleEat(chessGame[square], chessGame[square].occupiedColor);
+      handleEat(chessGame[square]);
       setChessGame({
         ...chessGame,
         [pieceChoice]: {
@@ -135,7 +134,18 @@ const Echiquier = () => {
   };
   return (
     <Container>
-      <ColorTurn>Player: {colorTurn}</ColorTurn>
+      <InfoContainer>
+        <BlackInfo>
+          <ScoreBlack>Black win: {winBlack.length}</ScoreBlack>
+          <p>{winBlack}</p>
+        </BlackInfo>
+        <ColorTurn>Player: {colorTurn}</ColorTurn>
+        <WhiteInfo>
+          <ScoreWhite>White win : {winWhite.length}</ScoreWhite>
+          <p>{winWhite}</p>
+        </WhiteInfo>
+      </InfoContainer>
+
       <ChessPlate>
         {[...Array(8)].map((x, i) => (
           <Column key={i} name={letters[i]}>
@@ -163,14 +173,6 @@ const Echiquier = () => {
           </Column>
         ))}
       </ChessPlate>
-      <BlackInfo>
-        <ScoreBlack>Black win: {winBlack.length}</ScoreBlack>
-        <p>{winBlack}</p>
-      </BlackInfo>
-      <WhiteInfo>
-        <ScoreWhite>White win : {winWhite.length}</ScoreWhite>
-        <p>{winWhite}</p>
-      </WhiteInfo>
     </Container>
   );
 };
