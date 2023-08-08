@@ -56,7 +56,7 @@ const StateProvider = ({ children }) => {
 
   const createObject = () => {
     const caseName = createCaseName();
-    var object = {};
+    var object = [];
     for (let i = 0; i < 64; i++) {
       object[caseName[i]] = {
         occupiedPiece: occupiedSquare[caseName[i]]?.piece,
@@ -75,6 +75,11 @@ const StateProvider = ({ children }) => {
   const [winWhite, setWinWhite] = useState([]);
   const [winBlack, setWinBlack] = useState([]);
   const [colorTurn, setColorTurn] = useState("white");
+  const [check, setCheck] = useState(false);
+  const [pawnPromotion, setPawnPromotion] = useState(false);
+  const [lastMove, setLastMove] = useState(null);
+  const [GameOver, setGameOver] = useState(false);
+  const [winner, setWinner] = useState(null);
   return (
     <StateContext.Provider
       value={{
@@ -92,6 +97,16 @@ const StateProvider = ({ children }) => {
         setWinBlack,
         colorTurn,
         setColorTurn,
+        check,
+        setCheck,
+        pawnPromotion,
+        setPawnPromotion,
+        lastMove,
+        setLastMove,
+        GameOver,
+        setGameOver,
+        winner,
+        setWinner,
       }}
     >
       {children}

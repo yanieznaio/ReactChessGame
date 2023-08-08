@@ -25,9 +25,11 @@ const knightMoove = (chessGame, piecePosition, color) => {
 
   moves.forEach((move) => {
     let letterIndex = letters.indexOf(piecePosition[0]) + move[0];
+
     let num = parseInt(piecePosition[1]) + move[1];
     if (letters[letterIndex] && num > 0 && num <= 8) {
       let pos = letters[letterIndex].concat(num);
+
       if (!!checkIfMovePossible(pos)) {
         if (checkIfcanBeEat(pos)) {
           canEat.push(pos);
@@ -36,7 +38,6 @@ const knightMoove = (chessGame, piecePosition, color) => {
         lMove.push(pos);
       }
     }
-
   });
 
   return [lMove, canEat];

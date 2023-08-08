@@ -1,5 +1,5 @@
 import { bishopMove } from "./bishop";
-import { rookMove } from "./games";
+import { rookMove } from "./rook";
 
 const queenMoove = (chessGame, piecePosition, color) => {
   var diagonalMove = bishopMove(chessGame, piecePosition, color);
